@@ -1,0 +1,585 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass[10pt]{beamer}
+\hypersetup{pdfpagemode=FullScreen}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+
+%\usetheme{Madrid}
+%\usetheme{Marburg}
+\usetheme{Frankfurt}
+\useoutertheme{split}
+\setbeamertemplate{navigation symbols}{}
+
+%\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage{color}
+
+
+\usepackage[backend=biber]{biblatex}
+%\bibliographystyle{ieeetr}
+\addbibresource{references.bib}
+
+\setbeamerfont{footnote}{size=\tiny} %reduce the size of the footnote citation
+
+\setbeamertemplate{bibliography item}{\insertbiblabel}  % Add numbered list of references in the end
+\setbeamertemplate{caption}[numbered]
+
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+%\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+% TOC at a section
+% \AtBeginSection[]
+% {
+%   \begin{frame}
+%     \frametitle{Table of Contents}
+%     \tableofcontents[currentsection]
+%   \end{frame}
+% }
+%----
+
+%----- old -------
+% \setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+% \setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+%----- new -------
+\setbeamertemplate{footline}{
+    \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex,leftskip=0.5cm,rightskip=0.5cm]{author in head/foot}
+        \usebeamerfont{author in head/foot}%
+        \hspace*{0.5cm}FU AI | Resfes FPU University HCM | 2023 \hfill\insertframenumber{}\hspace*{0.5cm}
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[wd=\paperwidth,ht=1pt,dp=0pt,leftskip=0.5cm,rightskip=0.5cm]{line in head/foot}
+        \color{black}\rule{\paperwidth}{1pt}
+    \end{beamercolorbox}
+}
+
+\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+
+
+\title[AI-ELTS]{AI-ELTS: Cost-Effective Essay Generation with Advanced GPT Architecture} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author[] {{An Dinh Ngoc} \and {Phuc Phan Van} \and {Hoa Dam Nguyen Quynh} \and {Van Nguyen Phuc} \and {Thanh Nguyen Phuoc} \\
+{\and} \\
+{\textit{Supervisors}} \\
+{Hieu Tang Quang}
+}
+\institute[FPT University]{FPT University} % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+\institute \\ % Your institution for the title page
+ % Your email address
+}
+\date{\today} % Date, can be changed to a custom date
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+%------------------------------------------------
+\section{Introduction} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
+%------------------------------------------------
+
+
+
+\begin{frame}{Introduction: IELTS Overview}
+IELTS is a widely recognized English examination used to evaluate a student's English proficiency.\\~\\
+\pause
+
+As of 2018, over 3.5 million people are taking the IELTS test every year. \footfullcite{ielts} \\~\\
+\pause
+
+Many universities in Vietnam are using the IELTS Score as the primary evaluation of English for enrollment.\\~\\
+\pause
+
+Among the four Sections in IELTS: Reading, Listening, Speaking, and Writing, research has shown that \alert{Writing} is the most difficult section to master. \footfullcite{ieltswriting}\\~\\
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Introduction: Task}
+
+\begin{block}{Task}<1->
+    Develop a fast, reliable AI system based on Natural Language Processing, without the need of GPU, to assist students in writing a perfect essay for IELTS Writing Task 2.
+\end{block}
+
+\begin{exampleblock}{Input and Output}<2->
+\begin{enumerate}
+    \item \textbf{Input: } A string of sentence you currently have.
+    \item \textbf{Output: } A piece of text likely to come after the input text based on its context.
+\end{enumerate}
+\end{exampleblock}
+
+\begin{block}{Goal}<3->
+    The end goal is to help student develop an optimal idea to write in an essay when they do not know what to write next.
+\end{block}
+\end{frame}
+
+
+%------------------------------------------------
+
+\begin{frame}{Introduction: Demo}
+
+\begin{figure}
+\includegraphics[width=0.5\linewidth]{images/abstract.png}
+\caption{Model Visualization.}
+\label{table:IELTS Academic mean performance}
+\end{figure}
+
+    
+\end{frame}
+
+%------------------------------------------------
+
+\section{Related Work} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
+
+\begin{frame}
+\frametitle{Related Work}
+\begin{block}{GPT-3 (OpenAI)}
+- Demonstrates remarkable performance across various language tasks.
+\end{block}
+
+\begin{block}{GPT-Neo (Eleuther AI)}
+- Computationally efficient alternative to GPT-3.\\
+- Maintains strong language generation capabilities.
+\end{block}
+
+\begin{block}{T5 (Google)}
+- Text-to-text framework, achieves remarkable results in different NLP tasks
+\end{block}
+
+\begin{block}{LaMDA (Google)}
+- focuses on conversational abilities
+\end{block}
+\end{frame}
+
+%------------------------------------------------
+
+
+
+%------------------------------------------------
+
+\section{Project}% Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
+
+%------------------------------------------------
+
+\subsection{Motivation} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
+
+\begin{frame}{Motivation}
+
+\begin{columns}[t]
+\begin{column}{5cm}
+
+ \begin{figure}
+\includegraphics[width=\linewidth]{images/ielts_bak.png}
+\caption{IELTS Academic mean performance by Nationality \footfullcite{ielts_graph}.}
+\label{table:IELTS Academic mean performance}
+\end{figure}
+
+\end{column}
+\begin{column}{5cm}
+\pause
+\begin{figure}
+    \centering \includegraphics[width=\linewidth]{images/chatgpt_costs.png}
+    \caption{Costs of running ChatGPT}
+\end{figure}
+
+\pause
+\begin{block}{Conclusion}
+    The model needs to be academic and reliable to be trusted by students, and using as little resources as possible (such as 1.3B parameters).
+\end{block}
+\end{column}
+\end{columns}
+
+
+
+    
+\end{frame}
+
+% \begin{frame}{Motivation}
+
+% Causes of poor IELTS Writing performance: \footfullcite{bagheri2016efl, cullen2017key}
+% \begin{enumerate}
+%     \item Learner: 
+%     \begin{itemize}
+%         \item Lack of practice.
+%         \item Anxiety when taking test.
+%         \item Unfamiliar with specialized topics, hard-to-understand prompts.
+%         \item False belief (e.g. write lengthy words)
+%     \end{itemize} 
+
+%     \item Teacher: Poor professional training.
+% \end{enumerate}
+    
+% \end{frame}
+
+
+%---------------
+
+\subsection{Practical Use} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
+
+\begin{frame}
+\frametitle{Practical Use}
+
+\begin{exampleblock}{Use Cases}
+    \begin{enumerate}
+        \item \alert{Suggest next sentences in an IELTS Writing essay.}
+        \item Help write a good thesis essay for university enrollment.
+        \item Prepare good cover letter and Curriculum Vitae (CV).
+        \item ...
+    \end{enumerate}
+\end{exampleblock}
+\end{frame}
+
+%-----
+
+\subsection{System}
+
+\begin{frame}
+\frametitle{System Overview}
+
+\begin{figure}
+    \centering    \includegraphics[width=\linewidth]{images/overview.png}
+    \caption{Full Model Architecture}
+    \label{fig:system_overview}
+\end{figure}
+
+\end{frame}
+
+%-----
+
+
+
+%------------------------------------------------
+
+%------------------------------------------------
+\subsection{Comparision of LLM Models}
+
+\begin{frame}
+\frametitle{Comparision of LLM Models: Data Usage}
+Most 3 common data types:
+
+\begin{block}{Webpages}<1->
+- LLMs leverage webpages to acquire diverse linguistic knowledge and enhance performance.\\
+- They can contain both high-quality and low-quality content, so filtering is necessary.
+\end{block}
+
+\begin{block}{Conversation Text}<2->
+- Includes conversation data, improves conversational competence and question-answering performance.\\
+- Can mistake instructions for conversation starters.
+\end{block}
+
+\begin{block}{Books}<3->
+- Books offer valuable linguistic knowledge, model long-term dependencies, and support coherent narrative generation.\\
+\end{block}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Comparison of LLM Models: Data Usage}
+- We have chosen \alert{GPT-Neo} because it has been pre-trained on a diverse range of data sources, with a significant emphasis on scientific data.
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{images/data-usage.jpg}
+\caption{Data usage of each model.}
+\end{figure}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\subsection{Model Development} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
+
+\begin{frame}
+\frametitle{Model Development: Data Preparation}
+\begin{itemize}
+    \item[\textcolor{black}{$\bullet$}]<1-> Gathered over 5000 passages from primary sources, including ChatGPT, IELTS Writing samples, and news articles. The training set - test set is 80\% - 20\% respectively.\\~\\
+    \item[\textcolor{black}{$\bullet$}]<2-> Balanced the data to ensure equal representation of each category, avoiding issues with imbalanced datasets, removed instances containing toxic or racist content.\\~\\
+    \item[\textcolor{black}{$\bullet$}]<3-> Set a maximum input length of 256 tokens for smoother model training and optimized memory usage using sliding window.\\~\\
+    \item[\textcolor{black}{$\bullet$}]<4-> One IELTS essay divided into parts, input to model is a sentence and the label is next parts of input sentence.
+\end{itemize} 
+
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Model Development: Training details}
+
+\begin{columns}[T] % T aligns the content at the top of each column
+\begin{column}{0.6\textwidth} % Adjust the width as needed
+% \frametitle{Table}
+\begin{table}
+\begin{tabular}{ll}
+\toprule
+\textbf{Hyperparameter} & \textbf{Value}\\
+\midrule
+Update Steps & 7020  \\ 
+Batch Size & 32 \\ 
+Warmup Steps & 50  \\ 
+Optimizer & AdamW  \\ 
+$\beta_1$ & 0.9  \\
+$\beta_2$ & 0.999  \\
+$\epsilon$ & $1\times 10^{-6}$  \\
+Learning Rate & $3\times 10^{-4}$ \\
+Learning Rate Scheduler & Linear Decay \\
+Loss & Cross Entropy \\
+Weight Decay & 0  \\
+\bottomrule
+\end{tabular}
+\caption{Hyperparameters}
+\end{table}
+\end{column}
+
+\begin{column}{0.45\textwidth} % Adjust the width as needed
+\vspace*{-10pt}
+    \
+    \begin{itemize}
+    \item[\textcolor{black}{$\bullet$}] Hardware: GPU A40.
+    \item[\textcolor{black}{$\bullet$}] Using mixed precision training to increase the batch size, conserve memory and speed up training process.
+    \item[\textcolor{black}{$\bullet$}] Almost all knowledge in LLM is learned during pre-training \footfullcite{lima}, fine-tune is conformed to a specific style or format. So that we just trained on few epochs (10 epochs). 
+    \item[\textcolor{black}{$\bullet$}] In experiment, training more than 10 epochs with batch size 32 makes model forget knowledge that has been learned in pre-training.
+    \end{itemize}
+    
+\vspace*{\fill}
+
+\end{column}
+\end{columns}
+
+\end{frame}
+
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Model Development: Evaluation}
+
+There is \alert{no official metric} for IELTS Writing evaluation, so alternatives are used.
+
+\pause
+
+\begin{table}
+\begin{tabular}{c c c c c}
+\toprule
+\textbf{Model name} & \textbf{Train loss} & \textbf{Validation loss} & \textbf{BLEU score } & \textbf{ROUGH score}\\
+\midrule
+ GPT2-124M & 1.7742 & 2.004801 & 0.231548 & 0.497854 \\
+ GPT2-355M & 0.6788 & 1.792658 & 0.370100 & 0.607069 \\
+ GPT2-774M & 0.2429 & \textbf{1.336823} & 0.567848 & 0.708003 \\
+ GPT-Neo-125M & 1.3602 & 2.307180 & 0.288826 & 0.516954 \\
+ GPT-Neo-1.3B & \textbf{0.1776} & 1.743037 & \textbf{0.600481} & \textbf{0.720475} \\
+\bottomrule
+\end{tabular}
+\caption{Evaluate score on BLEU and ROUGE\footnote{Lower loss is better, higher score is better.}.}
+\label{table:Evaluate score on BLEU and ROUGE}
+
+\end{table}
+\pause
+\begin{block}{BLEU Equation}
+\centering
+    $BLEU=\min \left (1,\frac{\|output\|}{\|reference\|} \right) \left ( \Pi_{i=1}^4 precision_i \right )^{0.25}$
+\end{block}
+
+\end{frame}
+
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Model Development: Evaluation}
+
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{images/evaluate.png}
+\caption{Evaluation on Grammarly tool.}
+\label{table:Evaluation on Grammarly tool}
+\end{figure}
+
+On average, the performance score is 82.53\% and plagiarism
+score is 12.95\%
+
+\end{frame}
+
+
+%------------------------------------------------
+\subsection{Deployment}
+
+\begin{frame}{Deployment}
+
+\begin{columns}[T]
+\begin{column}{5cm}
+
+\begin{figure}
+    \centering    \includegraphics[width=\linewidth]{images/work_flow.png}
+    \caption{Deployment Process}
+    \label{fig:work_flow}
+\end{figure}
+
+\end{column}
+\begin{column}{5cm}
+
+\begin{figure}
+    \centering    \includegraphics[width=\linewidth]{images/app.png}
+    \caption{Web App}
+    \label{fig:app}
+\end{figure}
+
+\end{column}
+\end{columns}
+\pause
+The output will be generated using \alert{CPU power} for reduced cost. \\~\\
+\pause
+The user can tweak many options on the Web: Temperature, Maximum length, Number of results.
+\end{frame}
+
+
+\section{Limitation and Future Work}% Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
+
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Limitation and Future Work}
+\begin{block}{Lack of Official Metric}<1->
+- Focus on developing a evaluation metric to accurately the appropriate band
+\end{block}
+
+\begin{block}{Data Quantity and Quality}<2->
+- Increase the size of dataset, more quality and introduce more diverse prompts.
+\end{block}
+
+\begin{block}{Model still not answering well on suitable style}<3->
+- Fine-tune the model using reinforcement learning techniques, leveraging human ranking feedback to further enhance its accuracy and responsiveness.\\
+\end{block}
+
+\begin{block}{Can not generate the ending sentence by user request}<4->
+- We acknowledge the need to improve upon this aspect.
+\end{block}
+\end{frame}
+
+%------------------------------------------------
+\section{Conclusion}
+%------------------------------------------------
+\begin{frame}{Conclusion}
+ \begin{itemize}
+    \item[$\blacktriangleright$]<1-> Conducted experiments on GPT-Neo to generate the next sentence in an IELTS text. \\~\\
+    \item[$\blacktriangleright$]<2-> The model can perform inference without the needs of strong hardware.\\~\\
+    \item[$\blacktriangleright$]<3-> The generated text can avoid plagiarism and achieves high score on Grammarly check.\\~\\
+    \item[$\blacktriangleright$]<4-> With more research and experiments, the model can develop to be the next big thing in the world of IELTS and Education.
+\end{itemize}   
+\end{frame}
+
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{References}
+\printbibliography
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\Huge{\centerline{The End}}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

@@ -1,0 +1,510 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{flushend}
+\usepackage{hyperref}
+% \usepackage{algorithm}
+\usepackage{algorithm2e}
+% \usepackage{algpseudocode}
+%\bibliographystyle{IEEEtran}
+%\bibliography{references}
+%\usepackage[sort]{natbib}
+%\usepackage[sort]{apacite}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+\title{The Future of Writing: Cost-Effective Essay Generation with Advanced GPT Architecture
+}
+
+\author{\IEEEauthorblockN{Hoa Dam Nguyen Quynh}
+\IEEEauthorblockA{\textit{Artificial Intelligence} \\
+\textit{FPT University}\\
+ Thu Duc, Ho  Chi  Minh  City, Viet Nam   \\
+hoadnqse171093@fpt.edu.vn}
+\and
+\IEEEauthorblockN{Van Nguyen Phuc}
+\IEEEauthorblockA{\textit{Artificial Intelligence} \\
+\textit{FPT University}\\
+ Thu Duc, Ho  Chi  Minh  City, Viet Nam   \\
+vannpse172344@fpt.edu.vn}
+\and
+\IEEEauthorblockN{Phuc Phan Van}
+\IEEEauthorblockA{\textit{Artificial Intelligence} \\
+\textit{FPT University}\\
+ Thu Duc, Ho  Chi  Minh  City, Viet Nam   \\
+phucpvse170209@fpt.edu.vn}
+\and
+\IEEEauthorblockN{Thanh Nguyen Phuoc}
+\IEEEauthorblockA{\textit{Artificial Intelligence} \\
+\textit{FPT University}\\
+ Thu Duc, Ho  Chi  Minh  City, Viet Nam   \\
+thanhnpse171408@fpt.edu.vn}
+\and
+\IEEEauthorblockN{An Dinh Ngoc}
+\IEEEauthorblockA{\textit{Artificial Intelligence} \\
+\textit{FPT University}\\
+ Thu Duc, Ho  Chi  Minh  City, Viet Nam   \\
+andnse171386@fpt.edu.vn}
+\and
+\IEEEauthorblockN{Hieu Tang Quang}
+\IEEEauthorblockA{\textit{Artificial Intelligence} \\
+\textit{FPT University}\\
+ Thu Duc, Ho  Chi  Minh  City, Viet Nam   \\
+hieutq10@fpt.edu.vn}
+}
+
+\maketitle
+\thispagestyle{plain}
+\pagestyle{plain}
+\begin{abstract}
+
+We are currently conducting research on a very interesting topic regarding the use of large language models in processing IELTS essays. Throughout the course of this study, we have utilized a dataset consisting of 5000 essays that were collected from various sources. In addition, we conducted a series of studies on LLM to compare and evaluate performance(which very few papers did before) in order to produce the best model for the topic of generating sentences for the IELTS writing task 2.
+
+The primary aim of this model is to facilitate the generation of ideas in writing by proposing pertinent English example sentences that align with the given topic and contextual framework. This approach serves to expedite the process of information retrieval and referencing, thereby enhancing the learning experience and fostering greater receptiveness among learners.
+
+\end{abstract}
+\begin{figure}[htbp]
+    \centerline{\includegraphics[width=3 in]{images/abstract.png}}
+    \caption{The example of the model process when receiving input and generating output.}
+    \label{fig1:work_flow}
+\end{figure}
+\begin{IEEEkeywords}
+Text Generation Model, Natural Language Processing, IELTS Writing Task 2
+\end{IEEEkeywords}
+
+\section{Introduction}
+
+Currently, IELTS is a widely recognized examination that most English language learners are familiar with. IELTS is an abbreviation for the International English Language Testing System, which is a globally used language proficiency assessment for non-native English speakers. In fact, even native speakers may face difficulties if they do not have a thorough understanding of the test format. Among the challenges, Task 2 of the Writing section often poses significant obstacles. It is rigorously evaluated based on criteria such as Task Response, Coherence and Cohesion, Lexical Resource, Grammatical Range and Accuracy, and Task Achievement. In order to address the challenges presented by IELTS Writing Task 2, we have developed a model to assist candidates in generating ideas for their essays, ensuring the essential characteristics required in the IELTS Writing Task 2 are met.
+
+In reality, there are already numerous models specialized in text generation. However, most of these studies tend to handle multiple tasks simultaneously, resulting in their inability to excel in a specific task. Firstly, these models are trained on a vast amount of data without task-specific allocation, leading to a wide range of data sources and a lack of control over the vocabulary, style, and tone of the generated essays. To address this issue, we propose a model specifically designed for generating IELTS Task 2 essays. This model is fine-tuned based on the GPT Neo 1.3b model \cite{gpt-neo} developed by EleutherAI. The gpt-neo-1.3b model is trained on Pile \cite{pile-dataset}, a large-scale dataset curated by EleutherAI specifically for training this model. We chose this model because it is trained on a domain-specific dataset related to the academic domain. Specifically, Pile comprises books, GitHub repositories, web pages, chat logs, and papers from the medical, physics, mathematics, computer science, and philosophy fields. This enables the model to possess reasoning abilities in these specific domains and ensures the linguistic quality required for a Task 2 essay.
+
+We utilize the GPT Neo 1.3b model and fine-tuned it by using IELTS Writing Task 2 essays. Specifically, we collected and filtered high-quality IELTS Writing Task 2 essays to expedite and optimize the training process.
+
+With this model, we aim to make a significant contribution to the IELTS community, as well as the broader field of English language learning. Furthermore, we strive to create positive impacts on the development of applications and research related to the education sector.
+
+\section{Related Work}
+
+Through a development process spanning over 70 years, text-generation models in the field of natural language processing have undergone significant transformations and have brought forth numerous positive benefits. The ultimate goal of text generation models is to produce meaningful sentences while maintaining fluency and eloquence in their language.
+
+
+In contemporary times, the application of text generation technology spans across diverse domains, wherein the GPT model has gained remarkable popularity as one of the most widely recognized models worldwide, boasting an extensive parameter count of approximately one trillion. Alongside GPT \cite{gpt-1}, there exist other noteworthy text generation models, such as BertGeneration \cite{bert}, which is a variant of Bert proposed in the scholarly work entitled "Leveraging Pre-trained Checkpoints for Sequence Generation Tasks" authored by Sascha Rothe, Shashi Narayan, and Aliaksei Severyn. BertGeneration leverages the EncoderDecoderModel \cite{encoder-decoder} to effectively address sequence-to-sequence tasks.
+
+Another prominent architecture in the field is the Text-To-Text Transfer Transformer (T5) \cite{t5}, which adopts an encoder-decoder framework. Specifically engineered for text-to-text transfer tasks, T5 facilitates the transformation of a given input into the desired output text. Through the process of fine-tuning, T5 models can be adapted to various tasks, including text classification, summarization, translation, and more. These models demonstrate versatility by performing multiple tasks without singularly focusing on a specific one.
+
+Nevertheless, in order to cater to the unique demands and challenges of essay writing for the IELTS Writing Task 2, a dedicated solution called AI-ELTs (Artificial Intelligence for English Language Tests) has been developed. AI-ELTs are meticulously designed to provide specialized support for candidates, aiding them in composing well-structured essays for the IELTS Writing Task 2.
+
+\section{Project}
+
+
+\subsection{Motivation}\label{AA}
+IELTS is one of the most popular English evaluation examinations and this form of test has been widely accepted across many universities as a standard English criterion for enrollment. As \cite{ielts} stated, "the number of IELTS tests grew to a record 3.5 million in 2018", therefore the desire for a proper strategy for achieving high scores is understandably high. However, among the four main sections in an IELTS test, the Writing section proves to be the most difficult among the students, as their average score is lower than the rest of the sections. The box-and-whisker chart at Figure \ref{fig:ielts_academic} clearly demonstrates the difference in the mean score of IELTS Writing against the others.
+
+Furthermore, being adept at writing not only helps in getting a high IELTS score, but also an impressive thesis for a scholarships application, or even further, a cover letter for a future job. This motivates our team to develop an AI system based on Natural Language Processing (NLP) to assist students in their writing essays so that they can brush up on their skills for the better.
+\begin{figure}
+  \includegraphics[width=\linewidth]{images/ielts_bak.png}
+  \caption{IELTS Academic mean performance by nationality. Data acquired from \cite{ielts_graph}}
+  \label{fig:ielts_academic}
+\end{figure}
+
+\subsection{Practical Use}
+There are many use case scenarios in which IELTS candidates can take full advantage of our system to advance their writing skills:
+\begin{itemize}
+\item Students and non-students who want a comprehensive and IELTS-standard writing style.
+\item Job seekers can also use this tool to help them work on a reliable cover letter or resume by generating the next sentence. As IELTS-standard writing is highly praised, a curriculum vitae (CV) in this form is acceptable amongst recruiters.
+\item Students who want to apply to universities will often be required to write a thesis essay, and this tool is a great source of inspiration for practice.
+\item Other use cases include: generating the next thought after a current thought, etc.
+\end{itemize}
+
+\subsection{System}
+The overall system can be described as follows:\\
+\subsubsection{Back-end Model}
+\begin{itemize}
+\item The model takes a text string, which indicates the sentence you currently have, as its input.
+\item The text string will then go through a series of embedding and transformers layers, producing a vector of numeric values representing the text string, such as how correlated different words are. Each vector element can be the attribute of the corresponding word such as the type of word (noun, verb), etc.
+\item The vector of the text string will then be fed into a Fully-Connected Neural Network, which finally outputs the probability of the next sentence through a Softmax layer.
+\end{itemize}
+
+\subsubsection{Front-end}
+\begin{itemize}
+\item After the final output has been generated in the front end, it will be transferred to the front end to be displayed to the user. A webpage will be our main front-end product for the model. 
+\item User will have a variety of options that tweak the desired output, such as the length, temperature (creativity of the text), and the number of generated results, for more freedom of choice.
+\end{itemize}
+
+
+\subsection{Comparison of LLM Models}
+% Natural Language Processing (NLP) systems play a crucial role in various applications, including virtual assistants, chatbots, and sentiment analysis. These systems heavily rely on language models, which are trained on extensive text data and can generate human-like text and perform various NLP tasks such as translation, question-answering, and summarization.
+\subsubsection{LLM Models Description}
+Language models are integral components of Natural Language Processing (NLP) systems used in applications like virtual assistants, chatbots, and sentiment analysis. These models are trained on large text datasets, enabling them to generate text resembling human language and perform diverse NLP tasks, including translation, question-answering, and summarization.
+
+The field of Natural Language Processing (NLP) has witnessed a transformative impact with the advent of large language models (LLMs) powered by deep learning and neural networks. This section focuses on comparing various state-of-the-art LLMs and their capabilities in the context of NLP. Numerous LLMs have been developed, each with its own unique strengths and weaknesses. The subsequent section provides an overview of some of the noteworthy LLMs in the field:
+
+\begin{itemize}
+    \item \textit{GPT-3} \cite{gpt-3}, an esteemed LLM model developed by OpenAI, stands as a pinnacle of power and recognition. With an impressive parameter count of 175 billion, it currently holds the title of the largest publicly available LLM. The GPT-3 paper introduced the concept of in-context learning (ICL) \cite{incontextlearning}, which leverages LLMs in a few-shot \cite{few-shot} or zero-shot \cite{zero-shot} manner. Through ICL, LLMs acquire task understanding by processing natural language text instructions. This integration of pre-training and utilization aligns LLMs with a unified language modeling paradigm. GPT-3 has showcased remarkable performance across a wide range of language tasks, encompassing text generation, translation, question-answering, and more. Its extensive size and capacity enable it to comprehend and generate text that exhibits human-like qualities on a multitude of subjects.
+    \item \textit{GPT-Neo} \cite{gpt-neo}, a variant of the GPT model developed by EleutherAI, focuses on providing a more accessible and computationally efficient alternative to large-scale models like GPT-3. GPT-Neo comes in various sizes, such as GPT-Neo 1.3, GPT-Neo 2.7, and GPT-Neo 4.7, representing the model sizes in terms of the number of billion parameters. Although smaller in size compared to GPT-3, GPT-Neo still exhibits impressive language generation capabilities across a broad range of tasks. These models are trained using publicly available data, aiming to democratize large-scale language models by reducing computational requirements while maintaining strong performance.
+    \item \textit{T5} \cite{t5}, developed by Google Research, is another notable LLM model that adopts a "text-to-text" framework. It converts various language tasks into a text-to-text format, leading to remarkable results in different NLP tasks, including summarization, translation, text classification, and more. T5 is renowned for its versatility and effectiveness across multiple domains, showcasing robust performance in both supervised and unsupervised learning scenarios.
+    \item \textit{LaMDA} \cite{lamda}, developed by Google, is an innovative LLM that incorporates conversational abilities. Unlike traditional LLMs, LamDA focuses on generating dynamic and context-aware responses in a conversational setting. It excels in tasks such as chatbots, dialogue systems, and interactive conversational agents. LamDA's unique design enables it to understand and generate natural language responses, leading to more engaging and interactive conversations. While it may have a different focus compared to BERT \cite{bert}, LamDA showcases impressive performance in conversational AI applications.\\
+\end{itemize}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{images/data-usage.jpg}
+  \caption{The distribution of data sources in the pre-training data for existing LLMs has been examined. \cite{zhao2023survey}}
+  \label{fig:data_distributed}
+\end{figure}
+
+\subsubsection{Data Usage}
+
+% General Text Data: figure \ref{fig:2} illustrates that the majority of LLMs utilize general-purpose pre-training data, including webpages, books, and conversational text, to acquire comprehensive linguistic knowledge and improve their generalization capabilities. We will now provide a brief summary of three essential types of general data:
+
+% - \textbf{Webpages}: The internet offers a vast array of data, allowing LLMs to acquire diverse linguistic knowledge and enhance their performance \cite{unsupervised-multitask-learners}. Previous studies have crawled large amounts of data from the web, such as CommonCrawl \cite{commoncrawl}. However, it is crucial to filter and process webpages to ensure data quality since they can contain both high-quality sources like Wikipedia and low-quality content such as spam emails.
+
+% - \textbf{Conversation Text}: Including conversation data in LLM training can improve their conversational competence \cite{conversation-data-improve-performance} and enhance performance in question-answering tasks \cite{enhance-performance-question-answering}. Researchers can utilize public conversation corpora subsets, such as the PushShift.io Reddit corpus, or collect conversation data from online social media. To handle online conversational data involving multiple participants, a common approach is to transform conversations into a tree structure, linking each utterance to its corresponding response. This allows for the collection of sub-conversations within the pre-training corpus. However, it is essential to note that excessive integration of dialogue data may lead to side effects \cite{side-effect}, such as instructions being mistakenly perceived as the start of conversations, which can impact the efficacy of instructions.
+
+% - \textbf{Books}: Books offer formal and lengthy texts that provide valuable linguistic knowledge, model long-term dependencies, and facilitate the generation of coherent narratives. Existing studies typically utilize open-source book datasets like Books3 and Bookcorpus2, available in the Pile dataset \cite{pile-dataset}, to incorporate book data into LLM training.
+
+
+Large Language Models (LLMs) utilize various types of general data to enhance their linguistic knowledge and generalization capabilities. Figure \ref{fig:data_distributed} shows the data categorial usage of four models. A brief summary of three common types of general data:
+
+\begin{itemize}
+    \item \textit{Webpages}: LLMs leverage webpages to acquire diverse linguistic knowledge and improve performance \cite{unsupervised-multitask-learners}. Filtering and processing are necessary to ensure data quality, as webpages can contain both high-quality sources like Wikipedia and low-quality content.
+    \item \textit{Conversation Text}: Including conversation data in LLM training enhances conversational competence \cite{conversation-data-improve-performance} and question-answering performance \cite{enhance-performance-question-answering}. Public conversation corpora subsets or data collected from online social media platforms can be used. However, caution should be exercised to prevent side effects, such as mistaking instructions for conversation starters \cite{side-effect}.
+    \item \textit{Books}: Books provide valuable linguistic knowledge, model long-term dependencies, and facilitate coherent narrative generation. Open-source book datasets like Books3 and Bookcorpus2 are commonly used for LLM training.
+\end{itemize} 
+By leveraging these diverse sources of general text data, LLMs can broaden their linguistic knowledge, improve their ability to understand and generate text and enhance performance across various NLP tasks. \textbf{GPT-Neo}, in particular, offers distinct advantages when it comes to the data it utilizes. Its training data is more diverse and includes a significant amount of scientific information, making it particularly suitable for writing tasks that require accurate and factual information, such as the IELTS Task 2. Compared to other LLMs like GPT-3 and T5, GPT-Neo excels in its ability to deliver high performance across a wide range of tasks while maintaining a smaller parameter count. This versatility makes GPT-Neo well-suited for various NLP applications. Moreover, the availability of publicly accessible training data and the user-friendly nature of GPT-Neo models facilitate reproducibility, enabling researchers and developers to build upon existing work and drive further advancements in the field.\\
+
+
+% Please use ``soft'' (e.g., \verb|\eqref{Eq}|) cross references instead
+% of ``hard'' references (e.g., \verb|(1)|). That will make it possible
+% to combine sections, add equations, or change the order of figures or
+% citations without having to go through the file line by line.
+
+% Please don't use the \verb|{eqnarray}| equation environment. Use
+% \verb|{align}| or \verb|{IEEEeqnarray}| instead. The \verb|{eqnarray}|
+% environment leaves unsightly spaces around relation symbols.
+
+% Please note that the \verb|{subequations}| environment in {\LaTeX}
+% will increment the main equation counter even when there are no
+% equation numbers displayed. If you forget that, you might write an
+% article in which the equation numbers skip from (17) to (20), causing
+% the copy editors to wonder if you've discovered a new method of
+% counting.
+
+% {\BibTeX} does not work by magic. It doesn't get the bibliographic
+% data from thin air but from .bib files. If you use {\BibTeX} to produce a
+% bibliography you must send the .bib files. 
+
+% {\LaTeX} can't read your mind. If you assign the same label to a
+% subsubsection and a table, you might find that Table I has been cross
+% referenced as Table IV-B3. 
+
+% {\LaTeX} does not have precognitive abilities. If you put a
+% \verb|\label| command before the command that updates the counter it's
+% supposed to be using, the label will pick up the last counter to be
+% cross-referenced instead. In particular, a \verb|\label| command
+% should not go before the caption of a figure or a table.
+
+% Do not use \verb|\nonumber| inside the \verb|{array}| environment. It
+% will not stop equation numbers inside \verb|{array}| (there won't be
+% any anyway) and it might stop a wanted equation number in the
+% surrounding equation.
+
+        
+\subsection{Model Development}\label{SCM}
+\subsubsection{Data Preparation}\label{SCM}
+For our dataset, we employed the Huggingface Tokenizer to convert the text data into tensors for computational purposes. Each tensor was constrained to a dimension of 256. As per Huggingface guidelines, these tensors served as both the input and label for the fine-tuning process. However, each essay in our dataset comprised approximately 250-300 words, exceeding the 256-dimensional limit for a single tensor representation. The most basic approach was to divide the text into blocks, with each block containing 256 tokens. However, this approach led to fragmented paragraphs and a loss of coherence between sentences within the same essay. Figure \ref{fig:data_process_algorithm} presents the illustration of the Block Divide and Sliding Window algorithm.
+
+\begin{figure}[ht]
+    \centerline{\includegraphics[width=3.5 in]{images/process_data_algo.png}}
+    \caption{Example of Block Divide and Sliding Window algorithms. Block Divide is shown with block\_size = 3, Sliding Window is shown with window\_size=2, and stride=1.}
+    \label{fig:data_process_algorithm}
+\end{figure}
+
+In Block Divide we can see straight, between blocks there is no connection between each other. But for the Sliding Window, we can see that the following blocks can completely carry part of the information of the previous blocks. So we opted to utilize the Sliding Window algorithm with two customizable parameters: window\_size and stride. The pseudo-code of the sliding window algorithm is shown at \ref{alg:sliding_window}.
+
+\RestyleAlgo{ruled}
+\SetKwComment{Comment}{/* }{ */}
+\SetCommentSty{small}
+\begin{algorithm}
+    \caption{Sliding Window Algorithm}\label{alg:sliding_window}
+    \KwData{\\ \hspace{0.5cm}paragraph: \textit{An essay in a dataset} \\ \hspace{0.5cm}tokenizer: \textit{Hugging Face's Tokenizer} \\ \hspace{0.5cm}stride $ > 0$ \\ \hspace{0.5cm}window\_size $ > 0$}
+    \vspace{0.15cm}
+    \KwResult{List of sequences token} 
+    \vspace{0.15cm}
+    $A \gets $ []\;
+    $start \gets 0$\;
+    $end \gets 0$\;
+    $tokens \gets tokenizer.tokenize(paragraph)$\;
+    $N \gets len(tokens)$\;
+    \vspace{0.15cm}
+    \While{$start \leq (N - window\_size)$}{
+        $end \gets start + window\_size$\;
+        $sub\_token \gets tokens[start:end]$\;
+        $A.append(sub\_token)$\;
+        $start \gets start + stride$\;
+    }
+\end{algorithm}
+
+        
+
+\begin{table}[!h]
+    \begin{center}
+        \caption{Hyperparameters} 
+        \begin{tabular}{|l|c|} 
+             \hline
+              Hyperparameter & Value  \\ [1ex] 
+            \hline
+
+             Update Steps & 7020  \\ [1ex] 
+
+             Batch Size & 32 \\ [1ex] 
+
+             Warmup Steps & 50  \\ [1ex] 
+
+             Optimizer & AdamW  \\ [1ex] 
+
+             $\beta_1$ & 0.9  \\ [1ex]
+
+             $\beta_2$ & 0.999  \\ [1ex]
+
+             $\epsilon$ & $1\times 10^{-6}$  \\ [1ex]
+
+             Learning Rate & $3\times 10^{-4}$ \\ [1ex]
+
+             Learning Rate Scheduler & Linear Decay \\ [1ex]
+
+             Loss & Cross Entropy \\ [1ex]
+
+             Weight Decay & 0  \\ [1ex]
+
+             \hline
+
+
+        \end{tabular}
+    \end{center}
+    \label{table:hyperparameters}
+    
+\end{table}
+        
+
+\subsubsection{Training Details}\label{SCM}
+In this paper, we conducted fine-tuning on our custom dataset using Hugging Face's Trainer. The complete set of parameters used for fine-tuning is outlined in Table \ref{table:hyperparameters}. To optimize the model's parameters, we employed the AdamW optimizer \cite{Adam} with a learning rate of $3\times 10^{-4}$. Additionally, we applied a linear learning rate decay, gradually reducing the learning rate to zero over time. To prioritize enhancing the quality of results in a small data set, we set the weight decay equal to 0 to prevent the model from getting stuck in sharp local minimum \cite{sharp-minimum-introduction} \cite{sharp-mimimum-smoothing}. The Cross-Entropy Loss function \cite{cross-entropy} was employed to quantify the discrepancy between predictions and actual labels. During the fine-tuning process, we conducted 10 epochs, with 90\% of the data allocated for training and the remaining 10\% for evaluation.
+
+Furthermore, to optimize performance and efficiency, we employed a mixed-precision approach. Specifically, we utilized a 16-bit integer format (FP16) for specific steps such as forward calculation and gradient computation, while converting back to a 32-bit integer (FP32) format to compute the loss and metric score. This method facilitated faster training, reduced memory usage, increased training batch size, and improved energy efficiency \cite{mixed-precision-training}, all while maintaining high-quality output.
+
+% During the initial stages of training and evaluation, we noticed that the model tended to generate sentences with limited relevance to the input passages due to a lack of contextual understanding. To address this issue, we employed two techniques: chain of thought \cite{chain-of-thought} and a 4-grams language model (LM) \cite{n-grams-LM}. By incorporating the chain of thought technique and our proprietary data, we were able to enhance the overall quality of the generated IELTS Task 2 essays. This technique closely emulates the way human writers construct their arguments, ensuring that the generated content follows a logical and coherent structure. Furthermore, by leveraging a 4-gram LM, we captured a greater amount of context and long-range dependencies within the text. This allowed the model to generate sentences that were more contextually appropriate and grammatically correct. The integration of these techniques facilitated the production of higher-quality essays, bringing them closer to the standard of human-written responses.\\
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{images/grammarly_setting.png}
+  \caption{Grammarly tool setting.}
+  \label{fig:grammarly_setting}
+\end{figure}
+
+\begin{figure}[ht]
+    \centerline{\includegraphics[width=3.5 in]{images/evaluate.png}}
+    \caption{Distribution of Performance Score \& Plagiarism Score on our model}
+    \label{fig:evaluate}
+\end{figure}
+\begin{table}[!h]
+    \begin{center}
+        \caption{Evaluate score} 
+        \begin{tabular}{|c|c|c|c|c|} 
+             \hline
+              Model name & Train loss & Valid loss & BLEU score & ROUGE score \\ [1ex] 
+            \hline
+
+             GPT2-124M & 1.7742 & 2.004801 & 0.231548 & 0.497854 \\ [1ex] 
+
+             GPT2-355M & 0.6788 & 1.792658 & 0.370100 & 0.607069 \\ [1ex] 
+
+             GPT2-774M & 0.2429 & \textbf{1.336823} & 0.567848 & 0.708003 \\ [1ex] 
+
+             GPT-Neo-125M & 1.3602 & 2.307180 & 0.288826 & 0.516954 \\ [1ex] 
+
+             GPT-Neo-1.3B & \textbf{0.1776} & 1.743037 & \textbf{0.600481} & \textbf{0.720475} \\ [1ex] 
+             \hline
+        \end{tabular}
+    \end{center}
+    \label{table:eval_score}
+    
+\end{table}
+
+
+
+\subsubsection{Evaluation} 
+As there is a lack of publicly available academic evaluation data specifically for this task, we employ BLEU \cite{bleu-metric} score and ROUGH \cite{rouge-metric} score, supplemented with loss evaluation to measure the effectiveness of our model. Additionally, we utilize the Grammarly tools which is a digital writing assistant to calculate scores for meaningful words, considering using setting specific domain of academic writing, with the report type and a format categorized as "other" to align with the APA style. The summary of Grammarly setting is in figure \ref{fig:grammarly_setting}. 
+
+The accuracy score is calculated as
+    \begin{equation}
+        a_{u}=f(n_w,n_i)\\
+    \end{equation}
+    
+and performance score as
+    \begin{equation}
+        p=c(a_{u},a_{o})
+    \end{equation}  
+    where $a_u$ is user accuracy score, $n_w$ is total number of words, $n_i$ is number of issues, $a_o$ is accuracy score of other text, as explained in \cite{grammarly}.
+
+We utilize a premium Grammarly account to evaluate based on 100 samples in the training set to determine if the model is experiencing overfitting. The evaluation on Grammarly will consist of two parts: text quality check and plagiarism check. For the text quality check, we will retrieve the overall score, which is calculated based on criteria such as readability and vocabulary usage in sentences. Moreover, the plagiarism check process is transparent and straightforward. Grammarly allows us to compare sample text passages with existing ones on various websites.
+Our main findings are presented in Table \ref{table:eval_score} and Figure \ref{fig:evaluate}.
+
+\begin{itemize}
+    \item Although the GPT-2 model with a size of 774M exhibited lower training and validation losses, our model, GPT-Neo 1.3 B, yielded intriguing results by outperforming other models in terms of BLEU and ROUGH scores. This indicates that the sentences generated by our model exhibit a higher degree of similarity and quality compared to the reference or human-generated text.
+    \item To enhance the integrity of the generated essays, we also evaluate several sample outputs using the Grammarly tool in our model. After obtaining results for the 100 data samples, the model has demonstrated excellent performance with a text performance score of \textbf{82.53\%} and a plagiarism score of \textbf{12.95\%}. The low plagiarism score indicates that the model has effectively avoided overfitting, while the text performance reflects the model's ability to learn contextual representations from preceding text portions to generate subsequent text.
+\end{itemize}
+\begin{figure}[htbp]
+            \centerline{\includegraphics[width=3 in]{images/work_flow.png}}
+            \caption{Diagram of the Working Process.}
+            \label{fig:work_flow}
+        \end{figure}
+\subsubsection{Model Deployment}\label{SCM}
+    \begin{itemize}
+        \item To deploy, we will utilize the Client Side Render mechanism, where ReactJS will be used to build the user interface and Python Flask will serve as the backend with main functionalities such as model loading and database interaction. View the Figure \ref{fig:work_flow} for an overview of the working process.
+        
+        \item ReactJS usage on the Frontend helps to enhance the user experience by implementing features without the need for page reload (this is an advantage of ReactJS when using the Client Side Render mechanism compared to Server Side Render). Additionally, ReactJS provides useful libraries to facilitate user interface development. \\
+
+        \item  In the special implementation approach, we can successfully deploy GPT-Neo-1.3B on a CPU with 32GB of RAM without the necessity of a GPU. By converting the data type of the weights from float32 to float16 to optimize memory usage and runtime, we can achieve this. However, this comes at the cost of sacrificing the model's accuracy, although the impact is insignificant.
+    \end{itemize}
+
+    \begin{figure}[ht]
+        \centerline{\includegraphics[width=3.5 in]{images/app.png}}
+        \caption{Web Application for Essay generation.}
+        \label{fig:web_application}
+    \end{figure}
+
+    
+
+
+% \subsection{Authors and Affiliations}
+% \textbf{The class file is designed for but is not limited to, six authors.} A 
+% minimum of one author is required for all conference articles. Author names 
+% should be listed starting from left to right and then moving down to the 
+% next line. This is the author sequence that will be used in future citations 
+% and by indexing services. Names should not be listed in columns nor grouped by 
+% affiliation. Please keep your affiliations as succinct as possible (for 
+% example, do not differentiate among departments of the same organization).
+
+% \subsection{Identify the Headings}
+% Headings, or heads, are organizational devices that guide the reader through 
+% your paper. There are two types: component heads and text heads.
+
+% Component heads identify the different components of your paper and are not 
+% topically subordinate to each other. Examples include Acknowledgments and 
+% References and, for these, the correct style to use is ``Heading 5''. Use 
+% ``figure caption'' for your Figure captions, and ``table head'' for your 
+% table title. Run-in heads, such as ``Abstract'', will require you to apply a 
+% style (in this case, italic) in addition to the style provided by the drop 
+% down menu to differentiate the head from the text.
+
+% Text heads organize the topics on a relational, hierarchical basis. For 
+% example, the paper title is the primary text head because all subsequent 
+% material relates and elaborates on this one topic. If there are two or more 
+% sub-topics, the next level head (uppercase Roman numerals) should be used 
+% and, conversely, if there are not at least two sub-topics, then no subheads 
+% should be introduced.
+
+% \subsection{Figures and Tables}
+% \paragraph{Positioning Figures and Tables} Place figures and tables at the top and 
+% bottom of columns. Avoid placing them in the middle of columns. Large 
+% figures and tables may span across both columns. Figure captions should be 
+% below the figures; table heads should appear above the tables. Insert 
+% figures and tables after they are cited in the text. Use the abbreviation 
+% ``Fig.~\ref{fig:fpt_logo}'', even at the beginning of a sentence.
+
+% \begin{table}[htbp]
+% \caption{Table Type Styles}
+% \begin{center}
+% \begin{tabular}{|c|c|c|c|}
+% \hline
+% \textbf{Table}&\multicolumn{3}{|c|}{\textbf{Table Column Head}} \\
+% \cline{2-4} 
+% \textbf{Head} & \textbf{\textit{Table column subhead}}& \textbf{\textit{Subhead}}& \textbf{\textit{Subhead}} \\
+% \hline
+% copy& More table copy$^{\mathrm{a}}$& &  \\
+% \hline
+% \multicolumn{4}{l}{$^{\mathrm{a}}$Sample of a Table footnote.}
+% \end{tabular}
+% \label{tab1}
+% \end{center}
+% \end{table}
+
+% \begin{figure}[ht!]
+% \centerline{\includegraphics[width=3.5 in]{images/FPTU_logo.png}}
+% \caption{Example of a figure caption.}
+% \label{fig:fpt_logo}
+% \end{figure}
+
+% Figure Labels: Use 8-point Times New Roman for Figure labels. Use words 
+% rather than symbols or abbreviations when writing Figure axis labels to 
+% avoid confusing the reader. As an example, write the quantity 
+% ``Magnetization'', or ``Magnetization, M'', not just ``M''. If including 
+% units in the label, present them within parentheses. Do not label axes only 
+% with units. In the example, write ``Magnetization (A/m)'' or ``Magnetization 
+% \{A[m(1)]\}'', not just ``A/m''. Do not label axes with a ratio of 
+% quantities and units. For example, write ``Temperature (K)'', not 
+% ``Temperature/K''.
+
+% \section{Evaluation}
+% Summarize your key findings and suggest future areas for research.
+\section{Limitations and Future Work}
+
+Based on our experimental results, analyses, and ablations, we have identified several limitations in our study and potential areas for future work:
+\begin{itemize}
+    \item \textbf{Building a suitable evaluation metric}: Currently, there is no official metric available to evaluate the appropriateness and quality of sentences in the IELTS Writing Task 2 format. Exploring alternative approaches, such as using a different base encoder-decoder \cite{encoder-decoder} or only decoder model \cite{gpt-1}, could be beneficial for assessing IELTS scoring and generating sentence examples. This could potentially involve zero-shot \cite{zero-shot} learning techniques.
+    \item \textbf{Choose an opening, body, or conclusion to create}: Our current focus has been on generating the next sentence based on the given context. However, there is a need to also generate appropriate closing sentences when requested by the user, or sentences suitable in the body. Adding this feature would enhance the usability and completeness of the system for users.
+    \item \textbf{Increasing the amount of data}: The availability of IELTS Writing Task 2 data is limited, particularly since a significant portion of it is privately owned. Collecting more high-quality data remains a challenging task. However, increasing the amount of data in training, particularly with a focus on only-decoder models, can significantly improve the results.
+    \item \textbf{Reinforcement Learning from Human Ranking}: Although our model demonstrates good results through self-supervised learning, there is still room for improvement. Incorporating reinforcement learning techniques, such as learning from human rankings \cite{human-feedback}, has the potential to further enhance the model's performance. By leveraging human input and rankings, we can fine-tune the model to prioritize necessary and frequently occurring patterns, leading to higher metrics during validation.
+
+\end{itemize}
+
+
+\section{Conclusion}
+    % In this report, we conducted experiments on versions of the GPT2 and GPT-Neo models for the task of generating IELTS text. The selection of these models enabled us to deploy them on a server with a minimum of 32GB RAM without the need for a GPU. ReactJS is a popular framework that can be easily deployed for free on platforms like \href{https://www.netlify.com/}{Netlify}, providing users with an improved experience and customizable features for text generation. Furthermore, the model demonstrated excellent performance when compared to the results obtained from the \href{https://app.grammarly.com/}{Grammarly} app in terms of assessing text quality and coherence, even though the model was fine-tuned on the half-precision data type, namely float16 instead of float32 (it has been shown that fine-tuning on float16 does not significantly reduce accuracy).
+
+
+    In this report, we conducted experiments on GPT-Neo models for the task of generating the next sentence in IELTS text. The model can run without the need for strong hardware like GPU but still obtains comparable performance with the SOTA research methodology. Furthermore, the model can overcome plagiarism and achieve a comfortable score on highly trustworthy sites like Grammarly.
+    In addition, we built a web-oriented application as a means for the user to experience the full capability of our model. However, there is always still room for improvement and we believe that the model, in the state that it is, has the potential to become the next big thing in AI products.
+
+    
+% \section*{Acknowledgment}
+
+% The preferred spelling of the word ``acknowledgment'' in America is without 
+% an ``e'' after the ``g''. Avoid the stilted expression ``one of us (R. B. 
+% G.) thanks $\ldots$''. Instead, try ``R. B. G. thanks$\ldots$''. Put sponsor 
+% acknowledgments in the unnumbered footnote on the first page.
+
+% \section*{References}
+
+% Please number citations consecutively within brackets \cite{Ngo2019}. The 
+% sentence punctuation follows the bracket \cite{Khorov_2018}. Refer simply to the reference 
+% the beginning of a sentence: ``Reference \cite{Ngo2019} was the first $\ldots$''
+
+% Number footnotes separately in superscripts. Place the actual footnote at 
+% the bottom of the column in which it was cited. Do not put footnotes in the 
+% abstract or reference list. Use letters for table footnotes.
+
+% Unless there are six authors or more give all authors' names; do not use 
+% ``et al.''. Papers that have not been published, even if they have been 
+% submitted for publication, should be cited as ``unpublished'' \cite{Ngo2020}. Papers 
+% that have been accepted for publication should be cited as ``in press'' \cite{Khorov_2018}. 
+% Capitalize only the first word in a paper title, except for proper nouns and 
+% element symbols.
+
+% For papers published in translation journals, please give the English 
+% citation first, followed by the original foreign-language citation \cite{Nawaz2017}.
+
+
+\bibliographystyle{IEEEtran}  %use this for IT
+%\bibliographystyle{apacite}     %use this for BA, Ling, GD-MC
+\bibliography{Bib_references}
+
+% \vspace{12pt}
+% \color{red}
+% IEEE conference templates contain guidance text for composing and formatting conference papers. Please ensure that all template text is removed from your conference paper prior to submission to the conference. Failure to remove the template text from your paper may result in your paper not being published.
+
+\end{document}
